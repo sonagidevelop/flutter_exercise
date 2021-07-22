@@ -72,7 +72,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             size: (_selectedIndex == 0) ? 33 : 20,
             color: (_selectedIndex == 0) ? Colors.orange : Colors.white),
         Icon(Icons.book,
-            size: (_selectedIndex == 1) ? 33 : 20,
+            size: (_selectedIndex == 1) ? 37 : 20,
             color: (_selectedIndex == 1) ? Colors.orange : Colors.white),
         Icon(Icons.flight,
             size: (_selectedIndex == 2) ? 33 : 20,
