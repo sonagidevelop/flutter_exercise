@@ -56,10 +56,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   CurvedNavigationBar buildCurvedNavigationBar() {
     return CurvedNavigationBar(
       index: 1,
-      height: 50,
-      backgroundColor: Colors.transparent,
-      buttonBackgroundColor: Colors.white,
-      color: Colors.black.withOpacity(0.3),
+      height: 70,
+      backgroundColor: Colors.lightBlue,
+      buttonBackgroundColor: Colors.black,
+      color: Colors.black,
       animationDuration: const Duration(milliseconds: 150),
       animationCurve: Curves.easeInOutQuart,
       onTap: (index) {
@@ -71,7 +71,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         Icon(Icons.home,
             size: (_selectedIndex == 0) ? 33 : 20,
             color: (_selectedIndex == 0) ? Colors.orange : Colors.white),
-        Icon(Icons.book,
+        Icon(Icons.blur_on,
             size: (_selectedIndex == 1) ? 40 : 20,
             color: (_selectedIndex == 1) ? Colors.orange : Colors.white),
         Icon(Icons.flight,
@@ -88,38 +88,81 @@ Widget home() {
       floatingActionButton: FloatingActionButton(
         onPressed: _gotoSetting,
         child: const Icon(Icons.notifications_none),
-        backgroundColor: Colors.orange,
+        backgroundColor: Color(0xffef4b3d),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [
+                0.1,
+                0.9
+              ],
+                  colors: [
+                Colors.indigo,
+                Colors.orange,
+              ])),
+          child: Column(
             children: [
-              Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                  child: Text(
-                    "서울시 서대문구 연희동",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  )),
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 150),
-                child: Text("일몰까지 52분 남았습니다.", style: TextStyle(fontSize: 30)),
+              Expanded(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "서울시 서대문구 연희동",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  color: Colors.white),
+                            ),
+                            Icon(Icons.expand_more, color: Colors.white)
+                          ],
+                        ),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      ),
+                      Container(
+                        child: Text(
+                          "일몰까지 37분 남았습니다.",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 25),
+                      )
+
+                      // Text(
+                      //   "일몰까지 37분 남았습니다.",
+                      //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      // ),
+                    ],
+                  ),
+                ),
+                flex: 3,
               ),
-              // Text("서울시 서대문구 연희동"),
-              // Text("일몰까지 52분 남았습니다."),
-              Image.asset(
-                "assets/sun.png",
-                width: 200,
-                height: 200,
+              Expanded(
+                child: Container(
+                    child: Image(
+                        image: AssetImage('assets/sun.png'), fit: BoxFit.fill)),
+                flex: 4,
+              ),
+              Expanded(
+                child: Container(
+                  child: Image(
+                    image: AssetImage('assets/city_view.png'),
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                flex: 6,
               )
             ],
-          ),
-          // Text("1"),
-          // Text("2"),
-        ],
-      ));
+          )));
 }
 
 Widget backgroundExercise() {
