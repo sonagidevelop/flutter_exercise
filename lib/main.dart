@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'subWidgets.dart';
 
 void main() => runApp(const MyApp());
 
@@ -41,7 +42,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   List _selectedMenu = [
     Text("1"),
     home(),
-    backgroundExercise(),
+    StackOver(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -57,10 +58,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return CurvedNavigationBar(
       index: 1,
       height: 70,
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: Colors.black,
       buttonBackgroundColor: Colors.black,
       color: Colors.black,
-      animationDuration: const Duration(milliseconds: 150),
+      animationDuration: const Duration(milliseconds: 100),
       animationCurve: Curves.easeInOutQuart,
       onTap: (index) {
         setState(() {
@@ -74,7 +75,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         Icon(Icons.blur_on,
             size: (_selectedIndex == 1) ? 40 : 20,
             color: (_selectedIndex == 1) ? Colors.orange : Colors.white),
-        Icon(Icons.flight,
+        Icon(Icons.edit,
             size: (_selectedIndex == 2) ? 33 : 20,
             color: (_selectedIndex == 2) ? Colors.orange : Colors.white),
       ],
