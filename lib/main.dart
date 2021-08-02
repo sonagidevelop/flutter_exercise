@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:navstackexer/calendarView.dart';
 import 'subWidgets.dart';
 
 void main() => runApp(const MyApp());
@@ -40,7 +41,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 1;
 
   List _selectedMenu = [
-    Text("1"),
+    CalendarView(title: 'title'),
     home(),
     StackOver(),
   ];

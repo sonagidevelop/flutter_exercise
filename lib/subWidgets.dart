@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'privateView.dart';
 
 class StackOver extends StatefulWidget {
   @override
@@ -24,6 +25,11 @@ class _StackOverState extends State<StackOver>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 30,
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -69,7 +75,7 @@ class _StackOverState extends State<StackOver>
                 children: [
                   // first tab bar view widget
                   Container(
-                    color: Colors.orange[100],
+                    child: pvView(),
                   ),
 
                   // second tab bar view widget
