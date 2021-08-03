@@ -41,7 +41,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 1;
 
   List _selectedMenu = [
-    CalendarView(title: 'title'),
+    CalendarView(),
     home(),
     StackOver(),
   ];

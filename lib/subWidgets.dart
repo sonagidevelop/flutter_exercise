@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navstackexer/calendarView.dart';
 import 'privateView.dart';
 
 class StackOver extends StatefulWidget {
@@ -26,7 +27,7 @@ class _StackOverState extends State<StackOver>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 30,
+        toolbarHeight: 20,
         foregroundColor: Colors.white,
         backgroundColor: Colors.white,
       ),
@@ -75,7 +76,7 @@ class _StackOverState extends State<StackOver>
                 children: [
                   // first tab bar view widget
                   Container(
-                    child: pvView(),
+                    child: CalendarView(),
                   ),
 
                   // second tab bar view widget

@@ -6,6 +6,8 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:navstackexer/database/db.dart';
+import 'package:navstackexer/database/diary.dart';
 
 // void main() {
 //   initializeDateFormatting().then((_) => runApp(MyApp()));
@@ -20,15 +22,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CalendarView(title: 'MyCalendar'),
+      home: CalendarView(),
     );
   }
 }
 
 class CalendarView extends StatefulWidget {
-  CalendarView({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  CalendarView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _CalendarViewState createState() => _CalendarViewState();
@@ -113,6 +115,7 @@ class _CalendarViewState extends State<CalendarView> {
               }
               setState(() {
                 _selectedDay = selectedDay;
+                print(selectedDay);
                 _focusedDay = focusedDay;
               });
             },
@@ -128,8 +131,8 @@ class _CalendarViewState extends State<CalendarView> {
             headerStyle: HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
-              headerPadding: EdgeInsets.all(20),
-              headerMargin: EdgeInsets.only(top: 40),
+              headerPadding: EdgeInsets.all(5),
+              // headerMargin: EdgeInsets.only(top: 40),
             ),
             daysOfWeekStyle: DaysOfWeekStyle(
                 decoration: BoxDecoration(), weekdayStyle: TextStyle()),
@@ -193,14 +196,14 @@ class _CalendarViewState extends State<CalendarView> {
             // }),
             eventLoader: _getEvnetsfromDay,
           ),
-          TextButton(
-            onPressed: () {},
-            child: Image.asset(
-              urlImage2,
-              height: 60,
-              width: 60,
-            ),
-          ),
+          // TextButton(
+          //   onPressed: () {},
+          //   child: Image.asset(
+          //     urlImage2,
+          //     height: 60,
+          //     width: 60,
+          //   ),
+          // ),
         ],
       )),
     );
@@ -225,11 +228,25 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> {
   // TextEditingController _eventController = TextEditingController();
+  Future<void> saveDB(String? datetime, String title, String text) async {
+    DBHelper sd = DBHelper();
+
+    var fido = Diary(
+      id: datetime,
+      title: title,
+      text: text,
+    );
+
+    await sd.insertDiary(fido);
+
+    print(await sd.diarys());
+  }
 
   int index = 3;
 
   @override
   Widget build(BuildContext context) {
+    final _formkey = GlobalKey<FormBuilderState>();
     final urlImage1 = 'assets/001.png';
     final urlImage2 = 'assets/002.png';
     final urlImage3 = 'assets/003.png';
@@ -250,6 +267,19 @@ class _SecondPageState extends State<SecondPage> {
             child: ElevatedButton(
               onPressed: () async {
                 Navigator.pop(context);
+                final dateValue =
+                    _formkey.currentState?.fields['date']?.value.toString();
+                final titleValue =
+                    _formkey.currentState?.fields['title']?.value;
+                final textValue =
+                    _formkey.currentState?.fields['description']?.value;
+                print(titleValue.runtimeType);
+                print(dateValue.runtimeType);
+                saveDB(
+                  dateValue,
+                  titleValue,
+                  textValue,
+                );
               },
               child: Text("Save"),
             ),
@@ -260,21 +290,21 @@ class _SecondPageState extends State<SecondPage> {
         padding: const EdgeInsets.all(10.0),
         children: <Widget>[
           FormBuilder(
+            key: _formkey,
             child: Column(
               children: [
                 Row(
                   children: [
+                    Text(index.toString()),
                     TextButton(
                       child: Image.asset(
                         urlImage1,
-                        width: 60,
-                        height: 60,
+                        width: 50,
+                        height: 50,
                       ),
                       onPressed: () {
                         index = 0;
                         setState(() {
-                          width:
-                          150;
                           height:
                           150;
                         });
@@ -283,14 +313,12 @@ class _SecondPageState extends State<SecondPage> {
                     FlatButton(
                       child: Image.asset(
                         urlImage2,
-                        width: 60,
-                        height: 60,
+                        width: 50,
+                        height: 50,
                       ),
                       onPressed: () {
                         index = 1;
                         setState(() {
-                          width:
-                          150;
                           height:
                           150;
                         });
@@ -299,14 +327,12 @@ class _SecondPageState extends State<SecondPage> {
                     FlatButton(
                       child: Image.asset(
                         urlImage3,
-                        width: 60,
-                        height: 60,
+                        width: 50,
+                        height: 50,
                       ),
                       onPressed: () {
                         index = 2;
                         setState(() {
-                          width:
-                          150;
                           height:
                           150;
                         });
